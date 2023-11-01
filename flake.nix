@@ -1,4 +1,4 @@
-  GNU nano 7.2                                                  flake.nix                                                            /**
+/**
   nix build .#rpi
  */
 {
