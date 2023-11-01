@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2.3.4
-
+      - uses: DeterminateSystems/magic-nix-cache-action@main
       - uses: cachix/install-nix-action@v13
         with:
           # Pin because the latest all-hardware profile changes
