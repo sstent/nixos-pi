@@ -10,14 +10,15 @@ jobs:
       - uses: actions/checkout@v2.3.4
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v4
-      - name: Run the Magic Nix Cache
-        uses: DeterminateSystems/magic-nix-cache-action@v2
         with:
           # Pin because the latest all-hardware profile changes
           # https://github.com/NixOS/nixpkgs/pull/128532
-          nix_path: nixpkgs=https://github.com/NixOS/nixpkgs/archive/c23146505c35a07bafbecf36af4f9ebde2bb7dfd.tar.gz
+          #nix_path: nixpkgs=https://github.com/NixOS/nixpkgs/archive/c23146505c35a07bafbecf36af4f9ebde2bb7dfd.tar.gz
           extra_nix_config: |
             extra-platforms = aarch64-linux
+
+      - name: Run the Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v2
 
       # - uses: myci-actions/add-deb-repo@8
       #   with:
@@ -34,13 +35,17 @@ jobs:
           cat /proc/sys/fs/binfmt_misc/qemu-aarch64
           /usr/bin/qemu-aarch64-static --version
 
+
       - name: Build SD Image
         run: |
-          nix-build '<nixpkgs/nixos>'  \
-            -A config.system.build.sdImage \
-            -I nixos-config=./configuration.nix \
-            --argstr system aarch64-linux \
-            --option sandbox false
+           nix run github:nix-community/nixos-generators -- -f sd-aarch64-installer	
+      # - name: Build SD Image
+      #   run: |
+      #     nix-build '<nixpkgs/nixos>'  \
+      #       -A config.system.build.sdImage \
+      #       -I nixos-config=./configuration.nix \
+      #       --argstr system aarch64-linux \
+      #       --option sandbox false
             
       - name: Build SD Image debug
         if: always()
