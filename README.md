@@ -1,47 +1,17 @@
-# NixOS Pi
+# NixOS ARM
 
 [![Build OS Image](https://github.com/davegallant/nixos-pi/actions/workflows/build-sd-image.yaml/badge.svg)](https://github.com/davegallant/nixos-pi/actions/workflows/build-sd-image.yaml)
 
-> :warning: The GitHub actions build is currently pinned to an outdated version of nixpkgs because of [this](https://github.com/NixOS/nixpkgs/pull/128532) issue
+Currently throws error on build for AARCH64
 
-This repo contains configuration for creating an NixOS image that runs on a Raspberry Pi.
-
-It contains the following services:
-  - [AdGuardHome](https://github.com/AdguardTeam/AdGuardHome)
-  - [Tailscale](https://tailscale.com/)
-  - [netdata](https://github.com/netdata/netdata)
-
-## Motivation
-
-Because [Reproducible Builds](https://reproducible-builds.org/) matter.
-
-And also, SD cards are not the most reliable form of storage, especially when they are operating non-stop. Because of this, I wanted a simple way to build a reproducible OS image that will run on a [Raspberry Pi](https://www.raspberrypi.org/).
-
-## Installation
-
-### Github Actions
-
-The workflow runs on Ubuntu and emulates the ARM platform with QEMU.
-
-When the build finishes, there will be an artifact named `sd-image.img.zip`.
-
-### Extract
-
-This archive can be decompressed and the image can flashed on an SD card and used to boot up the OS.
-
-```bash
-unzip sd-image.img.zip
-unzstd nixos-sd-image-21.05pre-git-aarch64-linux.img.zst
 ```
-
-### Flash to SD
-
-The image can be flashed using the [Raspberry Pi Imager](https://www.raspberrypi.org/blog/raspberry-pi-imager-imaging-utility/) or a simpler tool such as [dd](https://man7.org/linux/man-pages/man1/dd.1.html).
-
-### SSH
-
-The default user/password is `nixos/nixos` with SSH enabled. Either change the password on initial login, or enable an authorized key and disable the password.
-
-## Addtional Resources
-
-- [NixOS on ARM](https://nixos.wiki/wiki/NixOS_on_ARM#Installation)
+error: builder for '/nix/store/4yga1bvvzcp8wbg8rzzznwjwnramyjp6-ext4-fs.img.zst.drv' failed with exit code 1;
+       last 4 log lines:
+       > Preparing store paths for image...
+       > Creating an EXT4 image of 2512367616 bytes (numInodes=66425, numDataBlocks=480521)
+       > mke2fs 1.47.0 (5-Feb-2023)
+       > semop(1): encountered an error: Function not implemented
+       For full logs, run 'nix log /nix/store/4yga1bvvzcp8wbg8rzzznwjwnramyjp6-ext4-fs.img.zst.drv'.
+error: 1 dependencies of derivation '/nix/store/k78ampxdvlyg1q2hh9jr828w60jv1mgz-nixos-sd-image-23.11.20231029.0cbe9f6-aarch64-linux.img.drv' failed to build
+Error: Process completed with exit code 1.
+```
