@@ -41,6 +41,7 @@ jobs:
             --option sandbox false
             
       - name: Build SD Image debug
+        if: always()
         run: |           
           nix-store -l /nix/store/gh30dyjwl02aa2asc8zxghp99hx8wh8b-ext4-fs.img.zst.drv
 
