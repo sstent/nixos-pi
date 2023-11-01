@@ -1,5 +1,7 @@
 /**
-  nix build .#rpi
+  nix build .#odroid
+  nix build --option system aarch64-linux --option sandbox false .#odroid
+
  */
 {
   inputs = {
@@ -11,27 +13,25 @@
   };
   outputs = { self, nixpkgs, nixos-generators, ... }: {
     packages.aarch64-linux = {
-      rpi = nixos-generators.nixosGenerate {
+      odroid = nixos-generators.nixosGenerate {
         system = "aarch64-linux";
         modules = [
-          # you can include your own nixos configuration here, i.e.
-          # ./configuration.nix
           {
             config = {
               boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-              #nixpkgs.hostPlatform = "x86_64-linux";
+
               networking.hostName = "odroid";
               system = {
                 stateVersion = "22.11";
 
                 # Disable zstd compression
-                # build.sdImage.compressImage = false;
+                build.sdImage.compressImage = false;
               };
-              users.users.root = {
-                openssh.authorizedKeys.keys = [
-                  "ssh-rsa ... "
-                ];
-              };
+              # users.users.root = {
+              #   openssh.authorizedKeys.keys = [
+              #     "ssh-rsa ... "
+              #   ];
+              # };
             };
           }
         ];
