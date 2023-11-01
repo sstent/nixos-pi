@@ -16,11 +16,19 @@
       ];
 
       nixpkgs.hostPlatform = "x86_64-linux";
-      format = "sd-aarch64	";
+      format = "sd-aarch64";
+
+
+      # customize an existing format
+      formatConfigs.sd-aarch64 = {config, ...}: {
+        services.openssh.enable = true;
+      };
+
 
     # the evaluated machine
     nixosConfigurations.rpi = nixpkgs.lib.nixosSystem {
-      modules = [self.nixosModules.my-machine];
+      modules = [self.nixosModules.rpi];
     };
   };
+};
 }
