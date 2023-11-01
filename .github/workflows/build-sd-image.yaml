@@ -39,6 +39,9 @@ jobs:
             -I nixos-config=./configuration.nix \
             --argstr system aarch64-linux \
             --option sandbox false
+            
+      - name: Build SD Image debug
+        run: |           
           nix-store -l /nix/store/gh30dyjwl02aa2asc8zxghp99hx8wh8b-ext4-fs.img.zst.drv
 
       - uses: actions/upload-artifact@v2
