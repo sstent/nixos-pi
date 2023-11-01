@@ -19,7 +19,7 @@
           {
             config = {
               boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-              nixpkgs.hostPlatform = "x86_64-linux";
+              #nixpkgs.hostPlatform = "x86_64-linux";
               networking.hostName = "odroid";
               system = {
                 stateVersion = "22.11";
