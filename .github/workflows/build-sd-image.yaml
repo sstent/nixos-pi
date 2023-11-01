@@ -17,12 +17,12 @@ jobs:
           extra_nix_config: |
             extra-platforms = aarch64-linux
 
-      - uses: myci-actions/add-deb-repo@8
-        with:
-          repo: deb http://mirror.csclub.uwaterloo.ca/debian sid main non-free contrib
-          repo-name: debian-sid
-          keys: 648ACFD622F3D138
-          key-server: keyserver.ubuntu.com
+      # - uses: myci-actions/add-deb-repo@8
+      #   with:
+      #     repo: deb http://mirror.csclub.uwaterloo.ca/debian sid main non-free contrib
+      #     repo-name: debian-sid
+      #     keys: 648ACFD622F3D138
+      #     key-server: keyserver.ubuntu.com
 
       - run: |
           sudo apt -y install qemu-user-static
