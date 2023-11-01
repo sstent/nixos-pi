@@ -25,7 +25,7 @@
                 stateVersion = "22.11";
 
                 # Disable zstd compression
-                build.sdImage.compressImage = false;
+                #build.sdImage.compressImage = false;
               };
               # users.users.root = {
               #   openssh.authorizedKeys.keys = [
