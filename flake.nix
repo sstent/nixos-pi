@@ -1,11 +1,11 @@
 /**
   nix build .#odroid
   nix build --option system aarch64-linux --option sandbox false .#odroid
-
  */
 {
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    #nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.05";
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
