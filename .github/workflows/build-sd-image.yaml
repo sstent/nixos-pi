@@ -37,8 +37,9 @@ jobs:
 
 
       - name: Build SD Image
-        run: |
-           nix run github:nix-community/nixos-generators -- -f sd-aarch64-installer	
+        run: |  
+           nix build .#rpi
+      #nix run github:nix-community/nixos-generators -- -f sd-aarch64-installer	
       # - name: Build SD Image
       #   run: |
       #     nix-build '<nixpkgs/nixos>'  \
