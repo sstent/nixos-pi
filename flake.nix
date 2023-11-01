@@ -37,10 +37,6 @@
         ];
         format = "sd-aarch64";
       };
-      # vbox = nixos-generators.nixosGenerate {
-      #   system = "aarch64-linux";
-      #   format = "virtualbox";
-      # };
     };
   };
 }
