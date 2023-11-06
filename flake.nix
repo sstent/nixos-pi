@@ -12,6 +12,11 @@
     };
   };
   outputs = { self, nixpkgs, nixos-generators, ... }: {
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+    };
+    lib = nixpkgs.lib;
 
 nixosConfigurations.rpi2 = lib.nixosSystem {
       system = "armv7l-linux";
