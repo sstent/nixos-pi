@@ -12,6 +12,30 @@
     };
   };
   outputs = { self, nixpkgs, nixos-generators, ... }: {
+
+nixosConfigurations.rpi2 = lib.nixosSystem {
+      system = "armv7l-linux";
+
+      modules = [
+          ({ pkgs, config, ... }: {
+
+            imports = [
+                      # https://nixos.wiki/wiki/NixOS_on_ARM#Build_your_own_image
+                      # "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-armv7l-multiplatform-installer.nix"
+                      "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-armv7l-multiplatform.nix"
+                      cacheConfig
+                      ];
+            services.openssh = {
+              enable = true;
+              permitRootLogin = "yes";
+            };
+            boot.kernelPackages = lib.mkForce config.boot.zfs.package.latestCompatibleLinuxPackages;
+            users.extraUsers.root.initialPassword = lib.mkForce "test123";
+        })
+      ];
+    };
+
+
     packages.armv7l-linux = {
       odroid7 = nixos-generators.nixosGenerate {
         system = "armv7l-linux";
