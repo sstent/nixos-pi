@@ -1,0 +1,37 @@
+name: Build OS Image
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  build-default-image:
+    name: Build OS image
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v4
+        with:
+          extra_nix_config: |
+            extra-platforms = aarch64-linux
+
+      - name: Run the Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v2
+
+
+      - run: |
+          sudo apt -y install qemu-user-static
+
+      - name: Test binfmt
+        run: |
+          cat /proc/sys/fs/binfmt_misc/qemu-aarch64
+          /usr/bin/qemu-aarch64-static --version
+
+      - name: Build SD Image
+        run: |  
+           nix build --option system aarch64-linux --option sandbox false .#odroid7
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: sd-image.img
+          path: ./result/sd-image/*.img*
