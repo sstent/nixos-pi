@@ -11,13 +11,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { self, nixpkgs, nixos-generators, ... }: {
+  outputs = { self, nixpkgs, nixos-generators, ... }: let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
     };
     lib = nixpkgs.lib;
 
+in rec {
 nixosConfigurations.rpi2 = lib.nixosSystem {
       system = "armv7l-linux";
 
