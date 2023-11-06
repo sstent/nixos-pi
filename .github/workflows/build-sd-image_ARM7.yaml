@@ -1,4 +1,4 @@
-name: Build OS Image
+name: Build OS Image - ARM7
 on:
   workflow_dispatch:
   push:
@@ -29,6 +29,8 @@ jobs:
 
       - name: Build SD Image
         run: |  
+           nix-build '<nixpkgs>' -A pkgsCross.armv7l-hf-multiplatform.hello
+           ./result/bin/hello
            nix build --option system armv7l-linux --option sandbox false .#odroid7
 
       - uses: actions/upload-artifact@v2
