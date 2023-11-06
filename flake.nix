@@ -29,7 +29,6 @@ nixosConfigurations.rpi2 = lib.nixosSystem {
                       # https://nixos.wiki/wiki/NixOS_on_ARM#Build_your_own_image
                       # "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-armv7l-multiplatform-installer.nix"
                       "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-armv7l-multiplatform.nix"
-                      cacheConfig
                       ];
             services.openssh = {
               enable = true;
