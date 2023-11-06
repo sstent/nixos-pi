@@ -29,8 +29,6 @@ jobs:
 
       - name: Build SD Image
         run: |  
-           nix-build '<nixpkgs>' -A pkgsCross.armv7l-hf-multiplatform.hello
-           ./result/bin/hello
            nix build --option system armv7l-linux --option sandbox false .#pi2
 
       - uses: actions/upload-artifact@v2
