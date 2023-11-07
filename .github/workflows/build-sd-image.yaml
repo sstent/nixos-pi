@@ -40,6 +40,7 @@ jobs:
       - name: Download artifact # yes, this is really necessary
         uses: actions/download-artifact@v2
         with:
+          name: sd-image-ARM64_img
           path: release-files
       
       - name: Release
@@ -50,7 +51,7 @@ jobs:
           tag_name: Latest_ARM64
           body: Auto-generated image build - ARM64
           prerelease: true
-          files: ./release-files/sd-image-ARM64_img.zip
+          files: ./release-files/*
 
 
       # - uses: "marvinpinto/action-automatic-releases@latest"
