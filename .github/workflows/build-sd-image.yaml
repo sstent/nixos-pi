@@ -42,6 +42,10 @@ jobs:
         with:
           name: sd-image-ARM64_img
           path: release-files
+
+      - name: Display structure of downloaded files
+        run: ls -lah
+        working-directory: release-files
       
       - name: Release
         uses: softprops/action-gh-release@v1
