@@ -43,5 +43,4 @@ jobs:
           prerelease: true
           title: "Image Build - ARM64"
           files: |
-            LICENSE.txt
-            *.jar
+            ./result/sd-image/*.img*
