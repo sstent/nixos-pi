@@ -34,14 +34,30 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: sd-image.img
+          name: sd-image-ARM64_img
           path: ./result/sd-image/*.img*
 
-      - uses: "marvinpinto/action-automatic-releases@latest"
+      - name: Download artifact # yes, this is really necessary
+        uses: actions/download-artifact@v2
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
+          path: release-files
+      
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: Latest_ARM64
+          body: Auto-generated image build - ARM64
           prerelease: true
-          title: "Image Build - ARM64"
-          files: |
-            ./result/sd-image/*.img*
+          files: ./release-files/sd-image-ARM64_img.zip
+
+
+      # - uses: "marvinpinto/action-automatic-releases@latest"
+      #   with:
+      #     repo_token: "${{ secrets.GITHUB_TOKEN }}"
+      #     automatic_release_tag: "latest"
+      #     prerelease: true
+      #     title: "Image Build - ARM64"
+      #     files: |
+      #       ./result/sd-image/*.img*
