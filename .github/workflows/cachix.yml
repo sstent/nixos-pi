@@ -25,4 +25,4 @@ jobs:
 
       - name: Build Cachix
         run: |  
-           nix-build -L --option system armv7l-linux --option sandbox false -A cachix
+           nix-build --option system armv7l-linux --option sandbox false -A cachix
