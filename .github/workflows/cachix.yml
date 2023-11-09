@@ -25,4 +25,4 @@ jobs:
 
       - name: Build Cachix
         run: |  
-           nix-shell --option system armv7l-linux --option sandbox false -P cachix
+           nix-build -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/release-23.05.tar.gz --option system armv7l-linux -p cachix
