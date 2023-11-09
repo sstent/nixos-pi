@@ -29,3 +29,4 @@ jobs:
       - name: Build Cachix
         run: |  
            nix-build https://github.com/NixOS/nixpkgs/archive/release-23.05.tar.gz --attr cachix
+           nix path-info --all | cachix push fbleagh
