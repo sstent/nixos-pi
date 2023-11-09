@@ -1,4 +1,4 @@
-name: Build OS Image - ARM7
+name: Build Cachix - ARM7
 on:
   workflow_dispatch:
   #push:
@@ -25,4 +25,4 @@ jobs:
 
       - name: Build Cachix
         run: |  
-           nix build -vv -L --option system armv7l-linux --option sandbox false -A cachix
+           nix-build -L --option system armv7l-linux --option sandbox false -A cachix
