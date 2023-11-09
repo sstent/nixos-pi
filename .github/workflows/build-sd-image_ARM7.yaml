@@ -30,7 +30,7 @@ jobs:
 
       - name: Build SD Image
         run: |  
-           nix build -vv -L --option system armv7l-linux --option sandbox false --dry-run .#images.rpi2
+           nix build -v -L --option system armv7l-linux --option sandbox false .#images.rpi2
 
       - uses: actions/upload-artifact@v2
         with:
