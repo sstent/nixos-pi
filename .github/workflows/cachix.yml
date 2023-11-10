@@ -28,5 +28,5 @@ jobs:
 
       - name: Build Cachix
         run: |  
-           nix-build https://github.com/NixOS/nixpkgs/archive/release-23.05.tar.gz --option system armv7l-linux --option sandbox false --attr cachix
+           nix-build https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz --option system armv7l-linux --option sandbox false --attr cachix
 
